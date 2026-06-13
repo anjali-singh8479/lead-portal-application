@@ -32,7 +32,9 @@ function App() {
     });
   };
 
-  const handleSubmit = (e) => {
+
+const handleSubmit = async (e) => {
+
   e.preventDefault();
 
   if (
@@ -45,16 +47,37 @@ function App() {
     return;
   }
 
+  try {
 
+    const response = await fetch(
+      "http://localhost:3000/createlead",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      }
+    );
 
-  alert("Application Submitted");
-  setFormData({         
-      fullName: "",
-      email: "",
-      phone: "",
-      skills: "",
-      experience: ""
-    });
+    const data = await response.json();
+
+    alert(data.message);
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Error sending data");
+
+  }
+  setFormData({
+    fullName: "",
+    email: "",
+    phone: "",
+    skills: "",
+    experience: ""
+  });
 };
 
   return (
