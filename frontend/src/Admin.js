@@ -1,7 +1,7 @@
  import { useState, useEffect } from "react";
 function Admin() {
     const [leads, setLeads] = useState([]);
-
+    const [search, setSearch] = useState("");
     useEffect(() => {
         const fetchLeads = async () => {
         try {
@@ -21,6 +21,11 @@ function Admin() {
     fetchLeads();
     }, []);
     
+    const filteredLeads = leads.filter(
+  (lead) =>
+    lead.Last_Name?.toLowerCase().includes(search.toLowerCase()) ||
+    lead.Email?.toLowerCase().includes(search.toLowerCase())
+);
     const tablestyle = {
         borderCollapse: "collapse",
         width: "100%",
@@ -35,8 +40,14 @@ function Admin() {
         textAlign: "center",
     };
     return (
-        <div>
+        <div style={{ padding: "20px"}}>
             <h1>Admin Dashboard</h1>
+            <input style={{ marginBottom: "12px", padding: "8px", width: "400px", boxSizing: "border-box" }}
+                type="text"
+                placeholder="Search by name or email"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
             <table style={tablestyle}>
                 <thead>
                     <tr>
@@ -48,8 +59,13 @@ function Admin() {
                         <th style={thstyle}>Created Time</th>
                     </tr>
                 </thead>
+                {filteredLeads.length===0?(
                 <tbody style={bodyStyle}> 
-                    {leads.map((lead) => (
+                    <tr colSpan="6"><td colSpan="6">No leads found</td></tr>
+                </tbody>
+                ):(
+                <tbody style={bodyStyle}> 
+                    {filteredLeads.map((lead) => (
                         <tr key={lead.id}>
                             <td>{lead.Last_Name}</td>
                             <td>{lead.Email}</td>
@@ -60,8 +76,10 @@ function Admin() {
                         </tr>
                     ))}
                 </tbody>
+                )
+            }
             </table>
-
+            
         </div>
     );
 }
