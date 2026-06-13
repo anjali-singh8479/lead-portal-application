@@ -50,7 +50,7 @@ const handleSubmit = async (e) => {
   try {
 
     const response = await fetch(
-      "http://localhost:3000/createlead",
+    "http://localhost:3000/createlead",
       {
         method: "POST",
         headers: {
