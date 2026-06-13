@@ -7,19 +7,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// app.post("/createlead", (req, res) => {
-
-//     console.log("Received Data:");
-
-//     console.log(req.body);
-
-//     res.json({
-//         success: true,
-//         message: "Data received successfully"
-//     });
-
-// });
-
 app.post("/createlead", async (req,res)=>{
 
  try{
