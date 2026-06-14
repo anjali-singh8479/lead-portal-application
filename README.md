@@ -73,9 +73,9 @@ http://localhost:3000
 Create a `.env` file inside the backend folder.
 
 ```env
-ZOHO_CLIENT_ID=your_client_id
-ZOHO_CLIENT_SECRET=your_client_secret
-ZOHO_REFRESH_TOKEN=your_refresh_token
+CLIENT_ID=your_client_id
+CLIENT_SECRET=your_client_secret
+REFRESH_TOKEN=your_refresh_token
 ```
 
 ## Zoho CRM Configuration
